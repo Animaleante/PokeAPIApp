@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -26,10 +29,12 @@ import br.com.opet.tds.pokeapiapp.R;
 
 public class MainActivity extends Activity {
 
-    private static final String URL = "https://pokeapi.co/api/v2/pokemon/1";
+    private static final String URL = "https://pokeapi.co/api/v2/pokemon/";
     private RequestQueue queue;
     private Gson gson;
 
+    private EditText inputName;
+    private Button btnSearch;
     private TextView textID;
     private TextView textName;
     private TextView textHeight;
@@ -44,6 +49,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        inputName = findViewById(R.id.inputName);
+        btnSearch = findViewById(R.id.btnSearch);
         textID = findViewById(R.id.textID);
         textName = findViewById(R.id.textName);
         textHeight = findViewById(R.id.textHeight);
@@ -52,15 +59,23 @@ public class MainActivity extends Activity {
         imagePicture = findViewById(R.id.imagePicture);
         progressBar = findViewById(R.id.progressConnection);
 
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String pokemonNameOrId = inputName.getText().toString();
+                callPokemon(pokemonNameOrId);
+            }
+        });
+
         GsonBuilder builder = new GsonBuilder();
         gson = builder.create();
         queue = Volley.newRequestQueue(this);
-        callPokemon();
+        //callPokemon();
     }
 
-    private void callPokemon(){
+    private void callPokemon(String pokemonName){
         progressBar.setVisibility(ProgressBar.VISIBLE);
-        StringRequest request = new StringRequest(Request.Method.GET,URL,onPokemonLoaded,onPokemonError);
+        StringRequest request = new StringRequest(Request.Method.GET,URL+pokemonName,onPokemonLoaded,onPokemonError);
         queue.add(request);
     }
 
@@ -98,7 +113,7 @@ public class MainActivity extends Activity {
             Toast.makeText(MainActivity.this, "Erro ao capturar os dados.", Toast.LENGTH_SHORT).show();
             progressBar.setVisibility(ProgressBar.GONE);
 
-            callPokemon();
+            //callPokemon();
         }
     };
 }
