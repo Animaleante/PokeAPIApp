@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PokeAPIApp.iml" filepath="$PROJECT_DIR$/PokeAPIApp.iml" />
+      <module fileurl="file://C:\Users\opet\git\PokeAPIApp\PokeAPIApp.iml" filepath="C:\Users\opet\git\PokeAPIApp\PokeAPIApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\opet\git\PokeAPIApp\app\app.iml" filepath="C:\Users\opet\git\PokeAPIApp\app\app.iml" />
     </modules>
   </component>
 </project>

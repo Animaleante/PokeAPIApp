@@ -43,6 +43,10 @@
         android:textSize="24sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/imagePicture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 
 </LinearLayout>

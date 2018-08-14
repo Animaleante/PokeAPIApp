@@ -17,6 +17,7 @@ public class Pokemon {
     private int height;
     private int weight;
     private List<Types> types;
+    private Sprites sprites;
 
     public Pokemon() {
     }
@@ -61,6 +62,10 @@ public class Pokemon {
         this.types = types;
     }
 
+    public Sprites getSprites() { return sprites; }
+
+    public void setSprites(Sprites sprites) { this.sprites = sprites; }
+
     public class Types{
         private Type type;
 
@@ -89,5 +94,16 @@ public class Pokemon {
                 this.name = name;
             }
         }
+    }
+
+    public class Sprites {
+        @SerializedName("front_default")
+        private String frontDefault;
+
+        public Sprites() {}
+
+        public String getFrontDefault() { return frontDefault; }
+
+        public void setFrontDefault(String frontDefault) { this.frontDefault = frontDefault; }
     }
 }

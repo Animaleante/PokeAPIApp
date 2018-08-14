@@ -1,8 +1,10 @@
 package br.com.opet.tds.pokeapiapp.Activity;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +17,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 
 import br.com.opet.tds.pokeapiapp.Model.Pokemon;
@@ -31,6 +35,7 @@ public class MainActivity extends Activity {
     private TextView textHeight;
     private TextView textWeight;
     private TextView textTypes;
+    private ImageView imagePicture;
 
     private ProgressBar progressBar;
 
@@ -44,6 +49,7 @@ public class MainActivity extends Activity {
         textHeight = findViewById(R.id.textHeight);
         textWeight = findViewById(R.id.textWeight);
         textTypes = findViewById(R.id.textTypes);
+        imagePicture = findViewById(R.id.imagePicture);
         progressBar = findViewById(R.id.progressConnection);
 
         GsonBuilder builder = new GsonBuilder();
@@ -74,6 +80,10 @@ public class MainActivity extends Activity {
             }
 
             textTypes.setText(stypes);
+            Picasso.get()
+                    .load(pokemon.getSprites().getFrontDefault())
+                    .resize(imagePicture.getWidth(),imagePicture.getWidth())
+                    .into(imagePicture);
 
             Log.i("POKERESPONSE",response);
             progressBar.setVisibility(ProgressBar.GONE);
@@ -87,6 +97,8 @@ public class MainActivity extends Activity {
             Log.e("POKERESPONSE",error.toString());
             Toast.makeText(MainActivity.this, "Erro ao capturar os dados.", Toast.LENGTH_SHORT).show();
             progressBar.setVisibility(ProgressBar.GONE);
+
+            callPokemon();
         }
     };
 }
